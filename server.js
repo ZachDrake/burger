@@ -1,23 +1,24 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
-var PORT = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 var app = express();
 
-app.use(express.static("public"))
+app.use(express.static(process.cwd() + '/public'));
 
-app.use(express.urlendcoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-var exphbs = require("express-handlebars");
+app.use(methodOverride('_method'));
 
-app.engine("handlebars", exphbs({ defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+var exphbs = require('express-handlebars');
 
-var routes = require("./controllers/burgers_controller.js");
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
-app.use(routes);
+var routes = require('./controllers/burgers_controller.js');
 
-app.listen(PORT, () => {
-    console.log("Welcome to the good burger, home of the good burger, may I take your order?" + PORT);
-});
+app.use('/', routes);
+
+app.listen(port);

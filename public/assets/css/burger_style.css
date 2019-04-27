@@ -1,0 +1,7 @@
+#not-eaten {
+    float: left;
+}
+
+#eaten {
+    clear: both;
+}
