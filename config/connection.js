@@ -24,7 +24,7 @@ connection.connect(function(err) {
     console.error('ERROR: MySQL connection error -- ' + err.stack + '\n\n');
     return;
   }
-  console.log('Connected to MySQL database as id ' + connection.threadId + '\n\n');
+  console.log('Connected to MySQL database as id ' + connection.threadId + '\n\n'); 
 });
 
 // Export connection for ORM use
